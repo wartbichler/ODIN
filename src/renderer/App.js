@@ -10,7 +10,7 @@ import evented from './evented'
 
 const App = (props) => {
   const { classes } = props
-  const appProps = { ...props, ...{ id: 'map' } }
+  const mapProps = { ...props, id: 'map' }
 
   const [showManagement, setManagement] = React.useState(false)
   const [currentProjectPath, setCurrentProjectPath] = React.useState(undefined)
@@ -27,9 +27,10 @@ const App = (props) => {
 
   React.useEffect(() => {
     if (!showManagement && currentProjectPath) {
-      /*  When a project gets renamed the window title is set accordingly.
-          Since we use the current window for reading the project path
-          we can also do so for the project name.
+      /*
+        When a project gets renamed the window title is set accordingly.
+        Since we use the current window for reading the project path
+        we can also do so for the project name.
       */
       const projectName = remote.getCurrentWindow().getTitle()
       evented.emit('OSD_MESSAGE', { message: projectName, slot: 'A1' })
@@ -58,7 +59,7 @@ const App = (props) => {
 
   return (
     <React.Fragment>
-      <Map { ...appProps }/>
+      <Map { ...mapProps }/>
       <div className={classes.overlay}>
         <OSD />
       </div>
